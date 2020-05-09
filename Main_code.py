@@ -20,7 +20,7 @@ except ImportError:
 Outlook = win32com.client.Dispatch("Outlook.Application")
 ns = Outlook.GetNamespace("MAPI")
 appointments = ns.GetDefaultFolder(9).Items     #Folder 9 is the calendar folder, although I did not see this documented anywhere
-appointments.Sort('[Start]')                # Without these two lines, recurring appointments will give wierd results
+appointments.Sort('[Start]')                # Without these two lines, recurring appointments will give weird results
 appointments.IncludeRecurrences = True      # Found the solution here - https://msdn.microsoft.com/en-us/library/office/ff866969(v=office.14).aspx
                                             # Had to translate example #2 (from link above) from VBA to python.
 
@@ -28,7 +28,7 @@ appointments.IncludeRecurrences = True      # Found the solution here - https://
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'gcal-exch' #'JS_cal_import'
-ACCOUNT_CAL = 'primary' # for Google Apps calendard, use email account ex example@the-example.com
+ACCOUNT_CAL = 'primary' # for Google Apps calendar, use email account ex example@the-example.com
 
 # Get the AppointmentItem objects
 # http://msdn.microsoft.com/en-us/library/office/aa210899(v=office.11).aspx
@@ -43,7 +43,7 @@ def restrictedItems(appointmentst):
     restrictedItems1 = appointmentst.Restrict(restriction)
     return restrictedItems1
 
-###takes the exchange time and converts it to rfc 3339 format for googal calendar
+###takes the exchange time and converts it to rfc 3339 format for google calendar
 ## This is a total hack.  I don't have a firm grasp on datetime, so use my code with caution
 def time_conv(exch_time):
     exch_time = str(exch_time).replace(' ','/')
